@@ -1,0 +1,296 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ExpenseTracker.Views.TransactionPage"
+             Title="Giao dịch"
+             BackgroundColor="#F5F5F5">
+
+    <Grid RowDefinitions="Auto,*">
+        <!-- 1. Header: Wallet Selection - Ghim lên đầu, thu nhỏ, chính giữa -->
+        <Frame Grid.Row="0" 
+               Padding="10" 
+               Margin="60,10,60,5" 
+               BackgroundColor="White" 
+               CornerRadius="10"
+               HasShadow="True"
+               HorizontalOptions="Center">
+            <VerticalStackLayout Spacing="3" HorizontalOptions="Center">
+                <Label x:Name="WalletNameLabel" 
+                       Text="ATM" 
+                       FontSize="14" 
+                       FontAttributes="Bold"
+                       TextColor="#333333"
+                       HorizontalTextAlignment="Center"/>
+                <Label x:Name="WalletBalanceLabel" 
+                       Text="0đ" 
+                       FontSize="18" 
+                       FontAttributes="Bold"
+                       TextColor="#26DE81"
+                       HorizontalTextAlignment="Center"/>
+
+                <Picker x:Name="WalletPicker"
+                        Title="Chọn ví"
+                        SelectedIndexChanged="OnWalletChanged"
+                        TextColor="#4ECDC4"
+                        FontSize="12"
+                        HorizontalTextAlignment="Center"/>
+            </VerticalStackLayout>
+        </Frame>
+
+        <!-- Scrollable Content -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Spacing="10" Padding="10">
+
+                <!-- 2. Transaction Type Tabs -->
+                <Frame Padding="5" BackgroundColor="White" CornerRadius="10" HasShadow="True">
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="5">
+                        <Button x:Name="ExpenseTabButton" 
+                                Grid.Column="0"
+                                Text="Chi phí" 
+                                Clicked="OnExpenseTabClicked"
+                                BackgroundColor="#4ECDC4"
+                                TextColor="White"
+                                CornerRadius="8"
+                                FontAttributes="Bold"/>
+
+                        <Button x:Name="IncomeTabButton" 
+                                Grid.Column="1"
+                                Text="Thu nhập" 
+                                Clicked="OnIncomeTabClicked"
+                                BackgroundColor="#E0E0E0"
+                                TextColor="#666666"
+                                CornerRadius="8"
+                                FontAttributes="Bold"/>
+
+                        <!--<Button x:Name="TransferTabButton" 
+                                Grid.Column="2"
+                                Text="Chuyển tiền" 
+                                Clicked="OnTransferTabClicked"
+                                BackgroundColor="#E0E0E0"
+                                TextColor="#666666"
+                                CornerRadius="8"
+                                FontAttributes="Bold"/>-->
+                    </Grid>
+                </Frame>
+
+                <!-- 3. Date and Amount on Same Row -->
+                <Frame Padding="10" BackgroundColor="White" CornerRadius="10" HasShadow="True">
+                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="15">
+                        <!-- Left: Date Selection with Navigation -->
+                        <VerticalStackLayout Grid.Column="0" Spacing="5">
+                            <Label Text="Ngày giao dịch" FontSize="12" TextColor="#666666"/>
+                            <Grid ColumnDefinitions="Auto,Auto,Auto" ColumnSpacing="5">
+                                <Button Grid.Column="0"
+                                        Text="◀"
+                                        Clicked="OnPreviousDayClicked"
+                                        BackgroundColor="#4ECDC4"
+                                        TextColor="White"
+                                        CornerRadius="5"
+                                        WidthRequest="35"
+                                        HeightRequest="35"
+                                        FontSize="16"
+                                        Padding="0"/>
+
+                                <DatePicker Grid.Column="1"
+                                           x:Name="TransactionDatePicker"
+                                           Format="dd/MM/yyyy"
+                                           TextColor="#333333"
+                                           FontSize="16"
+                                           FontAttributes="Bold"
+                                           DateSelected="OnDateSelected"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center"/>
+
+                                <Button Grid.Column="2"
+                                        Text="▶"
+                                        Clicked="OnNextDayClicked"
+                                        BackgroundColor="#4ECDC4"
+                                        TextColor="White"
+                                        CornerRadius="5"
+                                        WidthRequest="35"
+                                        HeightRequest="35"
+                                        FontSize="16"
+                                        Padding="0"/>
+                            </Grid>
+                        </VerticalStackLayout>
+
+                        <!-- Right: Amount Entry -->
+                        <VerticalStackLayout Grid.Column="1" Spacing="5">
+                            <Label Text="Số tiền" FontSize="12" TextColor="#666666"/>
+                            <Entry x:Name="AmountEntry" 
+                                   Placeholder="0"
+                                   Keyboard="Numeric"
+                                   FontSize="20"
+                                   FontAttributes="Bold"
+                                   TextColor="#333333"
+                                   PlaceholderColor="#CCCCCC"
+                                   />
+                        </VerticalStackLayout>
+                    </Grid>
+                </Frame>
+
+                <!-- 4. Categories -->
+                <Frame Padding="15" BackgroundColor="White" CornerRadius="10" HasShadow="True">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="Danh mục" FontSize="14" FontAttributes="Bold" TextColor="#333333"/>
+                        <CollectionView x:Name="CategoriesCollectionView"
+                                       SelectionMode="Single"
+                                       SelectionChanged="OnCategorySelectionChanged">
+                            <CollectionView.ItemsLayout>
+                                <GridItemsLayout Orientation="Vertical" Span="4" VerticalItemSpacing="10" HorizontalItemSpacing="10"/>
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Frame Padding="8" 
+                                           BackgroundColor="#F0F0F0" 
+                                           CornerRadius="8"
+                                           HasShadow="False"
+                                           BorderColor="Transparent">
+                                        <Frame.Triggers>
+                                            <DataTrigger TargetType="Frame"
+                                                        Binding="{Binding IsSelected}"
+                                                        Value="True">
+                                                <Setter Property="BorderColor" Value="#4ECDC4"/>
+                                                <Setter Property="BackgroundColor" Value="#E0F7F5"/>
+                                            </DataTrigger>
+                                        </Frame.Triggers>
+                                        <VerticalStackLayout Spacing="3" HorizontalOptions="Center">
+                                            <Label Text="{Binding Icon}" 
+                                                   FontSize="24" 
+                                                   HorizontalTextAlignment="Center"/>
+                                            <Label Text="{Binding Name}" 
+                                                   FontSize="9" 
+                                                   HorizontalTextAlignment="Center"
+                                                   TextColor="#333333"
+                                                   LineBreakMode="TailTruncation"/>
+                                        </VerticalStackLayout>
+                                    </Frame>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Note Entry -->
+                <Frame Padding="15" BackgroundColor="White" CornerRadius="10" HasShadow="True">
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="Ghi chú" FontSize="12" TextColor="#666666"/>
+                        <Entry x:Name="NoteEntry" 
+                               Placeholder="Thêm ghi chú (tùy chọn)"
+                               FontSize="14"
+                               TextColor="#333333"
+                               PlaceholderColor="#CCCCCC"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- 5. Save Button -->
+                <Button x:Name="SaveButton"
+                        Text="Lưu giao dịch"
+                        Clicked="OnSaveClicked"
+                        BackgroundColor="#4ECDC4"
+                        TextColor="White"
+                        FontSize="16"
+                        FontAttributes="Bold"
+                        CornerRadius="10"
+                        HeightRequest="50"
+                        Margin="0,5"/>
+
+                <!-- 6. Summary Frame -->
+                <Frame x:Name="SummaryFrame" 
+                       Padding="15" 
+                       BackgroundColor="White" 
+                       CornerRadius="10"
+                       HasShadow="True"
+                       IsVisible="False">
+                    <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10">
+                        <VerticalStackLayout Grid.Column="0" HorizontalOptions="Center">
+                            <Label Text="Thu nhập" FontSize="11" TextColor="#666666" HorizontalTextAlignment="Center"/>
+                            <Label x:Name="TotalIncomeLabel" Text="0đ" FontSize="14" FontAttributes="Bold" TextColor="#26DE81" HorizontalTextAlignment="Center"/>
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout Grid.Column="1" HorizontalOptions="Center">
+                            <Label Text="Chi phí" FontSize="11" TextColor="#666666" HorizontalTextAlignment="Center"/>
+                            <Label x:Name="TotalExpenseLabel" Text="0đ" FontSize="14" FontAttributes="Bold" TextColor="#FC5C65" HorizontalTextAlignment="Center"/>
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout Grid.Column="2" HorizontalOptions="Center">
+                            <Label Text="Số dư" FontSize="11" TextColor="#666666" HorizontalTextAlignment="Center"/>
+                            <Label x:Name="BalanceLabel" Text="0đ" FontSize="14" FontAttributes="Bold" TextColor="#26DE81" HorizontalTextAlignment="Center"/>
+                        </VerticalStackLayout>
+                    </Grid>
+                </Frame>
+
+                <!-- 7. Transactions List -->
+                <Frame Padding="15" BackgroundColor="White" CornerRadius="10" HasShadow="True">
+                    <VerticalStackLayout Spacing="10">
+                        <Label x:Name="TransactionListTitle" 
+                               Text="Giao dịch hôm nay" 
+                               FontSize="15" 
+                               FontAttributes="Bold" 
+                               TextColor="#333333"/>
+
+                        <CollectionView x:Name="TransactionsCollectionView"
+                                       SelectionMode="Single"
+                                       SelectionChanged="OnTransactionSelected">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <SwipeView>
+                                        <SwipeView.RightItems>
+                                            <SwipeItems>
+                                                <SwipeItem Text="Xóa"
+                                                          BackgroundColor="#FC5C65"
+                                                          Invoked="OnDeleteSwipeItemInvoked"/>
+                                            </SwipeItems>
+                                        </SwipeView.RightItems>
+
+                                        <Frame Padding="10" 
+                                               Margin="0,3" 
+                                               BackgroundColor="#F9F9F9" 
+                                               CornerRadius="8"
+                                               HasShadow="False">
+                                            <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
+                                                <Label Grid.Column="0" 
+                                                       Text="{Binding CategoryIcon}" 
+                                                       FontSize="28" 
+                                                       VerticalOptions="Center"/>
+
+                                                <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                                                    <Label Text="{Binding CategoryName}" 
+                                                           FontSize="13" 
+                                                           FontAttributes="Bold"
+                                                           TextColor="#333333"/>
+                                                    <Label Text="{Binding Note}" 
+                                                           FontSize="11" 
+                                                           TextColor="#666666"
+                                                           IsVisible="{Binding HasNote}"/>
+                                                </VerticalStackLayout>
+
+                                                <Label Grid.Column="2" 
+                                                       Text="{Binding AmountDisplay}" 
+                                                       FontSize="15" 
+                                                       FontAttributes="Bold"
+                                                       TextColor="{Binding AmountColor}"
+                                                       VerticalOptions="Center"/>
+                                            </Grid>
+                                        </Frame>
+                                    </SwipeView>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+
+                            <CollectionView.EmptyView>
+                                <VerticalStackLayout Padding="20" Spacing="10">
+                                    <Label Text="📝" FontSize="35" HorizontalTextAlignment="Center"/>
+                                    <Label Text="Chưa có giao dịch nào" 
+                                           FontSize="13" 
+                                           TextColor="#999999"
+                                           HorizontalTextAlignment="Center"/>
+                                </VerticalStackLayout>
+                            </CollectionView.EmptyView>
+                        </CollectionView>
+                    </VerticalStackLayout>
+                </Frame>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

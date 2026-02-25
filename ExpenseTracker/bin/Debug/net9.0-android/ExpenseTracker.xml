@@ -1,0 +1,220 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ExpenseTracker</name>
+    </assembly>
+    <members>
+        <member name="T:ExpenseTracker.ViewModels.CalendarViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:ExpenseTracker.ViewModels.CalendarViewModel.CurrentMonth">
+            <inheritdoc cref="F:ExpenseTracker.ViewModels.CalendarViewModel.currentMonth"/>
+        </member>
+        <member name="P:ExpenseTracker.ViewModels.CalendarViewModel.MonthYearDisplay">
+            <inheritdoc cref="F:ExpenseTracker.ViewModels.CalendarViewModel.monthYearDisplay"/>
+        </member>
+        <member name="P:ExpenseTracker.ViewModels.CalendarViewModel.CalendarDays">
+            <inheritdoc cref="F:ExpenseTracker.ViewModels.CalendarViewModel.calendarDays"/>
+        </member>
+        <member name="P:ExpenseTracker.ViewModels.CalendarViewModel.TransactionGroups">
+            <inheritdoc cref="F:ExpenseTracker.ViewModels.CalendarViewModel.transactionGroups"/>
+        </member>
+        <member name="P:ExpenseTracker.ViewModels.CalendarViewModel.TotalIncome">
+            <inheritdoc cref="F:ExpenseTracker.ViewModels.CalendarViewModel.totalIncome"/>
+        </member>
+        <member name="P:ExpenseTracker.ViewModels.CalendarViewModel.TotalExpense">
+            <inheritdoc cref="F:ExpenseTracker.ViewModels.CalendarViewModel.totalExpense"/>
+        </member>
+        <member name="P:ExpenseTracker.ViewModels.CalendarViewModel.Balance">
+            <inheritdoc cref="F:ExpenseTracker.ViewModels.CalendarViewModel.balance"/>
+        </member>
+        <member name="P:ExpenseTracker.ViewModels.CalendarViewModel.SelectedWallet">
+            <inheritdoc cref="F:ExpenseTracker.ViewModels.CalendarViewModel.selectedWallet"/>
+        </member>
+        <member name="P:ExpenseTracker.ViewModels.CalendarViewModel.Wallets">
+            <inheritdoc cref="F:ExpenseTracker.ViewModels.CalendarViewModel.wallets"/>
+        </member>
+        <member name="P:ExpenseTracker.ViewModels.CalendarViewModel.IsLoading">
+            <inheritdoc cref="F:ExpenseTracker.ViewModels.CalendarViewModel.isLoading"/>
+        </member>
+        <member name="M:ExpenseTracker.ViewModels.CalendarViewModel.OnCurrentMonthChanged(System.DateTime)">
+            <summary>Executes the logic for when <see cref="P:ExpenseTracker.ViewModels.CalendarViewModel.CurrentMonth"/> just changed.</summary>
+            <param name="value">The new property value that was set.</param>
+            <remarks>This method is invoked right after the value of <see cref="P:ExpenseTracker.ViewModels.CalendarViewModel.CurrentMonth"/> is changed.</remarks>
+        </member>
+        <member name="F:ExpenseTracker.ViewModels.CalendarViewModel.previousMonthCommand">
+            <summary>The backing field for <see cref="P:ExpenseTracker.ViewModels.CalendarViewModel.PreviousMonthCommand"/>.</summary>
+        </member>
+        <member name="P:ExpenseTracker.ViewModels.CalendarViewModel.PreviousMonthCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:ExpenseTracker.ViewModels.CalendarViewModel.PreviousMonth"/>.</summary>
+        </member>
+        <member name="F:ExpenseTracker.ViewModels.CalendarViewModel.nextMonthCommand">
+            <summary>The backing field for <see cref="P:ExpenseTracker.ViewModels.CalendarViewModel.NextMonthCommand"/>.</summary>
+        </member>
+        <member name="P:ExpenseTracker.ViewModels.CalendarViewModel.NextMonthCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:ExpenseTracker.ViewModels.CalendarViewModel.NextMonth"/>.</summary>
+        </member>
+        <member name="F:ExpenseTracker.ViewModels.CalendarViewModel.goToTodayCommand">
+            <summary>The backing field for <see cref="P:ExpenseTracker.ViewModels.CalendarViewModel.GoToTodayCommand"/>.</summary>
+        </member>
+        <member name="P:ExpenseTracker.ViewModels.CalendarViewModel.GoToTodayCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:ExpenseTracker.ViewModels.CalendarViewModel.GoToToday"/>.</summary>
+        </member>
+        <member name="T:ExpenseTracker.ViewModels.CalendarDay">
+            <inheritdoc/>
+        </member>
+        <member name="P:ExpenseTracker.ViewModels.CalendarDay.Date">
+            <inheritdoc cref="F:ExpenseTracker.ViewModels.CalendarDay.date"/>
+        </member>
+        <member name="P:ExpenseTracker.ViewModels.CalendarDay.Day">
+            <inheritdoc cref="F:ExpenseTracker.ViewModels.CalendarDay.day"/>
+        </member>
+        <member name="P:ExpenseTracker.ViewModels.CalendarDay.IsCurrentMonth">
+            <inheritdoc cref="F:ExpenseTracker.ViewModels.CalendarDay.isCurrentMonth"/>
+        </member>
+        <member name="P:ExpenseTracker.ViewModels.CalendarDay.IsToday">
+            <inheritdoc cref="F:ExpenseTracker.ViewModels.CalendarDay.isToday"/>
+        </member>
+        <member name="P:ExpenseTracker.ViewModels.CalendarDay.HasTransactions">
+            <inheritdoc cref="F:ExpenseTracker.ViewModels.CalendarDay.hasTransactions"/>
+        </member>
+        <member name="P:ExpenseTracker.ViewModels.CalendarDay.Amount">
+            <inheritdoc cref="F:ExpenseTracker.ViewModels.CalendarDay.amount"/>
+        </member>
+        <member name="P:ExpenseTracker.ViewModels.CalendarDay.AmountDisplay">
+            <inheritdoc cref="F:ExpenseTracker.ViewModels.CalendarDay.amountDisplay"/>
+        </member>
+        <member name="P:ExpenseTracker.ViewModels.CalendarDay.TransactionCount">
+            <inheritdoc cref="F:ExpenseTracker.ViewModels.CalendarDay.transactionCount"/>
+        </member>
+        <member name="T:ExpenseTracker.Resource">
+            <summary>
+            Android Resource Designer class.
+            Exposes the Android Resource designer assembly into the project Namespace.
+            </summary>
+        </member>
+        <member name="T:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs">
+            <summary>
+            A helper type providing cached, reusable <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instances
+            for all properties generated with <see cref="T:CommunityToolkit.Mvvm.ComponentModel.ObservablePropertyAttribute"/>.
+            </summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.CurrentMonth">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "CurrentMonth" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.MonthYearDisplay">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "MonthYearDisplay" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.CalendarDays">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "CalendarDays" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.TransactionGroups">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "TransactionGroups" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.TotalIncome">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "TotalIncome" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.TotalExpense">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "TotalExpense" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Balance">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Balance" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SelectedWallet">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SelectedWallet" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Wallets">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Wallets" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsLoading">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsLoading" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Date">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Date" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Day">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Day" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsCurrentMonth">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsCurrentMonth" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsToday">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsToday" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.HasTransactions">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "HasTransactions" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Amount">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Amount" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.AmountDisplay">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "AmountDisplay" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.TransactionCount">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "TransactionCount" generated properties.</summary>
+        </member>
+        <member name="T:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs">
+            <summary>
+            A helper type providing cached, reusable <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instances
+            for all properties generated with <see cref="T:CommunityToolkit.Mvvm.ComponentModel.ObservablePropertyAttribute"/>.
+            </summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.CurrentMonth">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "CurrentMonth" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.MonthYearDisplay">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "MonthYearDisplay" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.CalendarDays">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "CalendarDays" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.TransactionGroups">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "TransactionGroups" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.TotalIncome">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "TotalIncome" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.TotalExpense">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "TotalExpense" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Balance">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Balance" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SelectedWallet">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SelectedWallet" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Wallets">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Wallets" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsLoading">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsLoading" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Date">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Date" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Day">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Day" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsCurrentMonth">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsCurrentMonth" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsToday">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsToday" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.HasTransactions">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "HasTransactions" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Amount">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Amount" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.AmountDisplay">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "AmountDisplay" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.TransactionCount">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "TransactionCount" generated properties.</summary>
+        </member>
+    </members>
+</doc>

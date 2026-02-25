@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:ExpenseTracker.ViewModels"
+             x:Class="ExpenseTracker.Views.LoginPage"
+             x:DataType="viewmodels:LoginViewModel"
+             Title="Đăng nhập"
+             BackgroundColor="#F8F8F8"
+             NavigationPage.HasNavigationBar="False">
+
+    <ScrollView>
+        <StackLayout Padding="30" Spacing="20">
+
+            <!-- Header -->
+            <StackLayout Spacing="10" Margin="0,60,0,40">
+                <Label Text="Chào mừng trở lại!" 
+                       FontSize="28" 
+                       FontAttributes="Bold" 
+                       HorizontalOptions="Center"
+                       TextColor="#333333"/>
+                <Label Text="Chào mừng bạn trở lại ExpenseTracker!" 
+                       FontSize="14" 
+                       HorizontalOptions="Center"
+                       TextColor="#888888"/>
+            </StackLayout>
+
+            <!-- Error Message -->
+            <Frame BackgroundColor="#FFEBEE" 
+                   Padding="15" 
+                   CornerRadius="10" 
+                   HasShadow="False"
+                   IsVisible="{Binding HasError}">
+                <Label Text="{Binding ErrorMessage}" 
+                       FontSize="14"
+                       TextColor="#C62828"
+                       HorizontalTextAlignment="Center"/>
+            </Frame>
+
+            <!-- Email Input -->
+            <Frame BackgroundColor="White" Padding="15" CornerRadius="15" HasShadow="False">
+                <Entry Text="{Binding Email}"
+                       Placeholder="Email" 
+                       Keyboard="Email"
+                       FontSize="16"
+                       TextColor="#333333"
+                       PlaceholderColor="#AAAAAA"
+                       IsEnabled="{Binding IsNotLoading}"/>
+            </Frame>
+
+            <!-- Password Input -->
+            <Frame BackgroundColor="White" Padding="15" CornerRadius="15" HasShadow="False">
+                <Grid ColumnDefinitions="*,Auto">
+                    <Entry Grid.Column="0"
+                           Text="{Binding Password}"
+                           Placeholder="Mật Khẩu"
+                           IsPassword="{Binding IsPasswordHidden}"
+                           FontSize="16"
+                           TextColor="#333333"
+                           PlaceholderColor="#AAAAAA"
+                           IsEnabled="{Binding IsNotLoading}"/>
+                    <Label Grid.Column="1"
+                           Text="{Binding PasswordVisibilityIcon}"
+                           FontSize="20"
+                           VerticalOptions="Center"
+                           TextColor="#888888">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding TogglePasswordVisibilityCommand}"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Grid>
+            </Frame>
+
+            <!-- Forgot Password Link -->
+            <Label Text="Quên Mật Khẩu?" 
+                   FontSize="14" 
+                   FontAttributes="Bold"
+                   TextColor="#4A90E2"
+                   HorizontalOptions="End">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ForgotPasswordCommand}"/>
+                </Label.GestureRecognizers>
+            </Label>
+
+            <!-- Login Button -->
+            <Button Text="{Binding LoginButtonText}"
+                    Command="{Binding LoginCommand}"
+                    BackgroundColor="#4267B2"
+                    TextColor="White"
+                    FontSize="18"
+                    FontAttributes="Bold"
+                    Padding="15"
+                    CornerRadius="15"
+                    Margin="0,10,0,0"
+                    IsEnabled="{Binding IsNotLoading}"/>
+
+            <!-- Loading Indicator -->
+            <ActivityIndicator IsRunning="{Binding IsLoading}"
+                              IsVisible="{Binding IsLoading}"
+                              Color="#4267B2"
+                              HorizontalOptions="Center"
+                              Margin="0,10,0,0"/>
+
+            <!-- Register Link -->
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="5" Margin="0,20,0,0">
+                <Label Text="Không có tài khoản?" 
+                       FontSize="14" 
+                       TextColor="#888888"
+                       VerticalOptions="Center"/>
+                <Label Text="Đăng ký ngay" 
+                       FontSize="14" 
+                       FontAttributes="Bold"
+                       TextColor="#FF7675"
+                       VerticalOptions="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NavigateToRegisterCommand}"/>
+                    </Label.GestureRecognizers>
+                </Label>
+            </StackLayout>
+
+        </StackLayout>
+    </ScrollView>
+
+</ContentPage>

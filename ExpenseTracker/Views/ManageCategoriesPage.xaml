@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ExpenseTracker.Views.ManageCategoriesPage"
+             Title="Quản lý danh mục"
+             BackgroundColor="#F5F5F5">
+
+    <Grid RowDefinitions="Auto,*">
+        <!-- Tab Selector -->
+        <Grid Grid.Row="0" 
+              ColumnDefinitions="*,*" 
+              Padding="0"
+              BackgroundColor="White">
+            <Frame Grid.Column="0"
+                   x:Name="ExpenseTabFrame"
+                   Padding="0"
+                   Margin="0"
+                   CornerRadius="0"
+                   HasShadow="False"
+                   BackgroundColor="#4ECDC4"
+                   BorderColor="#4ECDC4">
+                <Label Text="Chi tiêu"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       TextColor="White"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       Padding="15">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnExpenseTabTapped"/>
+                    </Label.GestureRecognizers>
+                </Label>
+            </Frame>
+
+            <Frame Grid.Column="1"
+                   x:Name="IncomeTabFrame"
+                   Padding="0"
+                   Margin="0"
+                   CornerRadius="0"
+                   HasShadow="False"
+                   BackgroundColor="White"
+                   BorderColor="#E0E0E0">
+                <Label Text="Thu nhập"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       TextColor="#666666"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       Padding="15">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnIncomeTabTapped"/>
+                    </Label.GestureRecognizers>
+                </Label>
+            </Frame>
+        </Grid>
+
+        <!-- Categories List -->
+        <ScrollView Grid.Row="1">
+            <StackLayout Padding="15" Spacing="10">
+                <CollectionView x:Name="CategoriesCollectionView"
+                               SelectionMode="None">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <SwipeView>
+                                <SwipeView.RightItems>
+                                    <SwipeItems>
+                                        <SwipeItem Text="Xóa"
+                                                  BackgroundColor="#FF4444"
+                                                  Invoked="OnDeleteCategory"/>
+                                    </SwipeItems>
+                                </SwipeView.RightItems>
+
+                                <Frame BackgroundColor="White"
+                                       Padding="15"
+                                       Margin="0,5"
+                                       CornerRadius="10"
+                                       HasShadow="False">
+                                    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="15">
+                                        <Frame Grid.Column="0"
+                                               Padding="10"
+                                               CornerRadius="25"
+                                               WidthRequest="50"
+                                               HeightRequest="50"
+                                               HasShadow="False"
+                                               BorderColor="Transparent"
+                                               IsClippedToBounds="True">
+                                            <Frame.Background>
+                                                <SolidColorBrush Color="{Binding Color}"/>
+                                            </Frame.Background>
+                                            <Label Text="{Binding Icon}"
+                                                   FontSize="24"
+                                                   HorizontalOptions="Center"
+                                                   VerticalOptions="Center"/>
+                                        </Frame>
+
+                                        <Label Grid.Column="1"
+                                               Text="{Binding Name}"
+                                               FontSize="16"
+                                               TextColor="#333333"
+                                               VerticalOptions="Center"/>
+
+                                        <Label Grid.Column="2"
+                                               Text="✏️"
+                                               FontSize="20"
+                                               VerticalOptions="Center">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="OnEditCategory" 
+                                                                     CommandParameter="{Binding .}"/>
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                    </Grid>
+                                </Frame>
+                            </SwipeView>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
+        </ScrollView>
+
+        <!-- Add Button -->
+        <Frame Grid.Row="1"
+               Padding="0"
+               CornerRadius="30"
+               WidthRequest="60"
+               HeightRequest="60"
+               HasShadow="True"
+               BackgroundColor="#4ECDC4"
+               BorderColor="#4ECDC4"
+               HorizontalOptions="End"
+               VerticalOptions="End"
+               Margin="20"
+               IsClippedToBounds="True">
+            <Label Text="+"
+                   FontSize="36"
+                   FontAttributes="Bold"
+                   TextColor="White"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnAddCategoryClicked"/>
+                </Label.GestureRecognizers>
+            </Label>
+        </Frame>
+    </Grid>
+
+</ContentPage>

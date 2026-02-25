@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ExpenseTracker.Views.EditProfilePage"
+             Title="Chỉnh sửa hồ sơ"
+             BackgroundColor="#F5F5F5">
+
+    <ScrollView>
+        <StackLayout Padding="20" Spacing="20">
+
+            <!-- Avatar Selection -->
+            <Label Text="Chọn Avatar"
+                   FontSize="16"
+                   FontAttributes="Bold"
+                   TextColor="#333333"
+                   Margin="0,20,0,10"/>
+
+            <Frame BackgroundColor="White" 
+                   Padding="20" 
+                   CornerRadius="10"
+                   HasShadow="False">
+                <Grid RowDefinitions="Auto,Auto" RowSpacing="20">
+                    <!-- Current Avatar -->
+                    <Frame Grid.Row="0"
+                           Padding="0"
+                           CornerRadius="50"
+                           WidthRequest="100"
+                           HeightRequest="100"
+                           HasShadow="False"
+                           BackgroundColor="#4ECDC4"
+                           BorderColor="#4ECDC4"
+                           HorizontalOptions="Center"
+                           IsClippedToBounds="True">
+                        <Label x:Name="CurrentAvatarLabel"
+                               Text="👤"
+                               FontSize="60"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"/>
+                    </Frame>
+
+                    <!-- Avatar Options -->
+                    <FlexLayout Grid.Row="1"
+                               Wrap="Wrap"
+                               JustifyContent="Center"
+                               AlignItems="Center">
+                        <Frame Padding="0" Margin="5" CornerRadius="30" WidthRequest="60" HeightRequest="60" 
+                               HasShadow="False" BackgroundColor="#E3F2FD" BorderColor="#4ECDC4">
+                            <Label Text="👤" FontSize="36" HorizontalOptions="Center" VerticalOptions="Center">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnAvatarSelected" CommandParameter="👤"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </Frame>
+                        <Frame Padding="0" Margin="5" CornerRadius="30" WidthRequest="60" HeightRequest="60" 
+                               HasShadow="False" BackgroundColor="#E3F2FD" BorderColor="#4ECDC4">
+                            <Label Text="😊" FontSize="36" HorizontalOptions="Center" VerticalOptions="Center">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnAvatarSelected" CommandParameter="😊"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </Frame>
+                        <Frame Padding="0" Margin="5" CornerRadius="30" WidthRequest="60" HeightRequest="60" 
+                               HasShadow="False" BackgroundColor="#E3F2FD" BorderColor="#4ECDC4">
+                            <Label Text="😎" FontSize="36" HorizontalOptions="Center" VerticalOptions="Center">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnAvatarSelected" CommandParameter="😎"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </Frame>
+                        <Frame Padding="0" Margin="5" CornerRadius="30" WidthRequest="60" HeightRequest="60" 
+                               HasShadow="False" BackgroundColor="#E3F2FD" BorderColor="#4ECDC4">
+                            <Label Text="🤩" FontSize="36" HorizontalOptions="Center" VerticalOptions="Center">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnAvatarSelected" CommandParameter="🤩"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </Frame>
+                        <Frame Padding="0" Margin="5" CornerRadius="30" WidthRequest="60" HeightRequest="60" 
+                               HasShadow="False" BackgroundColor="#E3F2FD" BorderColor="#4ECDC4">
+                            <Label Text="🥳" FontSize="36" HorizontalOptions="Center" VerticalOptions="Center">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnAvatarSelected" CommandParameter="🥳"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </Frame>
+                        <Frame Padding="0" Margin="5" CornerRadius="30" WidthRequest="60" HeightRequest="60" 
+                               HasShadow="False" BackgroundColor="#FCE4EC" BorderColor="#4ECDC4">
+                            <Label Text="👨" FontSize="36" HorizontalOptions="Center" VerticalOptions="Center">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnAvatarSelected" CommandParameter="👨"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </Frame>
+                        <Frame Padding="0" Margin="5" CornerRadius="30" WidthRequest="60" HeightRequest="60" 
+                               HasShadow="False" BackgroundColor="#FCE4EC" BorderColor="#4ECDC4">
+                            <Label Text="👩" FontSize="36" HorizontalOptions="Center" VerticalOptions="Center">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnAvatarSelected" CommandParameter="👩"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </Frame>
+                        <Frame Padding="0" Margin="5" CornerRadius="30" WidthRequest="60" HeightRequest="60" 
+                               HasShadow="False" BackgroundColor="#FFF3E0" BorderColor="#4ECDC4">
+                            <Label Text="🐶" FontSize="36" HorizontalOptions="Center" VerticalOptions="Center">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnAvatarSelected" CommandParameter="🐶"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </Frame>
+                        <Frame Padding="0" Margin="5" CornerRadius="30" WidthRequest="60" HeightRequest="60" 
+                               HasShadow="False" BackgroundColor="#FFF3E0" BorderColor="#4ECDC4">
+                            <Label Text="🐱" FontSize="36" HorizontalOptions="Center" VerticalOptions="Center">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnAvatarSelected" CommandParameter="🐱"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </Frame>
+                        <Frame Padding="0" Margin="5" CornerRadius="30" WidthRequest="60" HeightRequest="60" 
+                               HasShadow="False" BackgroundColor="#E1F5FE" BorderColor="#4ECDC4">
+                            <Label Text="🚀" FontSize="36" HorizontalOptions="Center" VerticalOptions="Center">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnAvatarSelected" CommandParameter="🚀"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </Frame>
+                        <Frame Padding="0" Margin="5" CornerRadius="30" WidthRequest="60" HeightRequest="60" 
+                               HasShadow="False" BackgroundColor="#E1F5FE" BorderColor="#4ECDC4">
+                            <Label Text="⭐" FontSize="36" HorizontalOptions="Center" VerticalOptions="Center">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnAvatarSelected" CommandParameter="⭐"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </Frame>
+                        <Frame Padding="0" Margin="5" CornerRadius="30" WidthRequest="60" HeightRequest="60" 
+                               HasShadow="False" BackgroundColor="#F3E5F5" BorderColor="#4ECDC4">
+                            <Label Text="💎" FontSize="36" HorizontalOptions="Center" VerticalOptions="Center">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnAvatarSelected" CommandParameter="💎"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </Frame>
+                    </FlexLayout>
+                </Grid>
+            </Frame>
+
+            <!-- Display Name -->
+            <Label Text="Tên hiển thị"
+                   FontSize="16"
+                   FontAttributes="Bold"
+                   TextColor="#333333"
+                   Margin="0,10,0,10"/>
+
+            <Frame BackgroundColor="White" 
+                   Padding="15" 
+                   CornerRadius="10"
+                   HasShadow="False">
+                <Entry x:Name="DisplayNameEntry"
+                       Placeholder="Nhập tên hiển thị"
+                       FontSize="16"
+                       TextColor="#333333"/>
+            </Frame>
+
+            <!-- Save Button -->
+            <Button x:Name="SaveButton"
+                    Text="Lưu thay đổi"
+                    Clicked="OnSaveClicked"
+                    BackgroundColor="#4ECDC4"
+                    TextColor="White"
+                    FontSize="16"
+                    FontAttributes="Bold"
+                    Padding="15"
+                    Margin="0,20,0,0"
+                    CornerRadius="10"/>
+
+            <!-- Cancel Button -->
+            <Button Text="Hủy"
+                    Clicked="OnCancelClicked"
+                    BackgroundColor="#E0E0E0"
+                    TextColor="#666666"
+                    FontSize="16"
+                    Padding="15"
+                    CornerRadius="10"/>
+
+        </StackLayout>
+    </ScrollView>
+
+</ContentPage>

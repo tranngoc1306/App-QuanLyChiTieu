@@ -1,0 +1,348 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ExpenseTracker.Views.CalendarPage"
+             Title="Lịch"
+             BackgroundColor="#F5F5F5">
+
+    <Grid RowDefinitions="Auto,*">
+
+        <!-- Header với Wallet - Ghim đầu trang, thu nhỏ, giữa màn -->
+        <Frame Grid.Row="0" 
+               Padding="10" 
+               Margin="60,10,60,0" 
+               BackgroundColor="White" 
+               CornerRadius="10"
+               HasShadow="True"
+               HorizontalOptions="Center">
+            <VerticalStackLayout Spacing="3" HorizontalOptions="Center">
+                <Picker x:Name="WalletPicker"
+                        ItemsSource="{Binding Wallets}"
+                        SelectedItem="{Binding SelectedWallet}"
+                        ItemDisplayBinding="{Binding Name}"
+                        SelectedIndexChanged="OnWalletChanged"
+                        FontSize="14"
+                        FontAttributes="Bold"
+                        TextColor="#333333"
+                        HorizontalTextAlignment="Center"/>
+
+                <Label x:Name="WalletBalanceLabel"
+                       Text="{Binding SelectedWallet.Balance, StringFormat='{0:N0}đ'}"
+                       FontSize="18"
+                       FontAttributes="Bold"
+                       TextColor="#26DE81"
+                       HorizontalTextAlignment="Center"/>
+            </VerticalStackLayout>
+        </Frame>
+
+        <!-- Main Content -->
+        <ScrollView Grid.Row="1" Margin="0,10,0,0">
+            <VerticalStackLayout Spacing="10">
+
+                <!-- Month Navigation -->
+                <Frame BackgroundColor="White" 
+                       Padding="15" 
+                       Margin="10,0"
+                       CornerRadius="10"
+                       HasShadow="True">
+                    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                        <!-- Previous Month -->
+                        <Button Grid.Column="0"
+                                Text="◀"
+                                BackgroundColor="#4ECDC4"
+                                TextColor="White"
+                                CornerRadius="20"
+                                WidthRequest="40"
+                                HeightRequest="40"
+                                Padding="0"
+                                FontSize="16"
+                                Clicked="OnPreviousMonthClicked"/>
+
+                        <!-- Month Display -->
+                        <Label Grid.Column="1"
+                               Text="{Binding MonthYearDisplay}"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               TextColor="#333333"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"/>
+
+                        <!-- Next Month -->
+                        <Button Grid.Column="2"
+                                Text="▶"
+                                BackgroundColor="#4ECDC4"
+                                TextColor="White"
+                                CornerRadius="20"
+                                WidthRequest="40"
+                                HeightRequest="40"
+                                Padding="0"
+                                FontSize="16"
+                                Clicked="OnNextMonthClicked"/>
+                    </Grid>
+                </Frame>
+
+                <!-- Calendar Grid -->
+                <Frame BackgroundColor="White" 
+                       Padding="10"
+                       Margin="10,0"
+                       CornerRadius="10"
+                       HasShadow="True">
+                    <VerticalStackLayout Spacing="0">
+                        <!-- Day Headers -->
+                        <Grid ColumnDefinitions="*,*,*,*,*,*,*" 
+                              RowDefinitions="35"
+                              BackgroundColor="#F8F8F8"
+                              Margin="0,0,0,5">
+                            <Label Grid.Column="0" Text="T2" FontSize="12" FontAttributes="Bold" 
+                                   HorizontalOptions="Center" VerticalOptions="Center" TextColor="#666666"/>
+                            <Label Grid.Column="1" Text="T3" FontSize="12" FontAttributes="Bold" 
+                                   HorizontalOptions="Center" VerticalOptions="Center" TextColor="#666666"/>
+                            <Label Grid.Column="2" Text="T4" FontSize="12" FontAttributes="Bold" 
+                                   HorizontalOptions="Center" VerticalOptions="Center" TextColor="#666666"/>
+                            <Label Grid.Column="3" Text="T5" FontSize="12" FontAttributes="Bold" 
+                                   HorizontalOptions="Center" VerticalOptions="Center" TextColor="#666666"/>
+                            <Label Grid.Column="4" Text="T6" FontSize="12" FontAttributes="Bold" 
+                                   HorizontalOptions="Center" VerticalOptions="Center" TextColor="#666666"/>
+                            <Label Grid.Column="5" Text="T7" FontSize="12" FontAttributes="Bold" 
+                                   HorizontalOptions="Center" VerticalOptions="Center" TextColor="#666666"/>
+                            <Label Grid.Column="6" Text="CN" FontSize="12" FontAttributes="Bold" 
+                                   HorizontalOptions="Center" VerticalOptions="Center" TextColor="#FF6B6B"/>
+                        </Grid>
+
+                        <!-- Calendar Days -->
+                        <CollectionView x:Name="CalendarCollectionView"
+                                        ItemsSource="{Binding CalendarDays}"
+                                        SelectionMode="Single"
+                                        SelectionChanged="OnDaySelected">
+                            <CollectionView.ItemsLayout>
+                                <GridItemsLayout Orientation="Vertical" 
+                                               Span="7"/>
+                                               <!--VerticalItemSpacing="1"
+                                               HorizontalItemSpacing="1"/>-->
+                            </CollectionView.ItemsLayout>
+
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Frame Padding="4"
+                                           HeightRequest="70"
+                                           BackgroundColor="White"
+                                           BorderColor="#E0E0E0"
+                                           CornerRadius="0"
+                                           HasShadow="False">
+                                        <Frame.Triggers>
+                                            <DataTrigger TargetType="Frame"
+                                                        Binding="{Binding IsCurrentMonth}"
+                                                        Value="False">
+                                                <Setter Property="BackgroundColor" Value="#F9F9F9"/>
+                                            </DataTrigger>
+                                            <DataTrigger TargetType="Frame"
+                                                        Binding="{Binding IsToday}"
+                                                        Value="True">
+                                                <Setter Property="BorderColor" Value="#4ECDC4"/>
+                                            </DataTrigger>
+                                        </Frame.Triggers>
+
+                                        <Grid RowDefinitions="Auto,Auto,*">
+                                            <!-- Day Number -->
+                                            <Label Grid.Row="0"
+                                                   Text="{Binding Day}"
+                                                   FontSize="16"
+                                                   FontAttributes="Bold"
+                                                   TextColor="#333333"
+                                                   HorizontalOptions="Center"
+                                                   Margin="2,0,0,0">
+                                                <Label.Triggers>
+                                                    <DataTrigger TargetType="Label"
+                                                                Binding="{Binding IsCurrentMonth}"
+                                                                Value="False">
+                                                        <Setter Property="TextColor" Value="#CCCCCC"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger TargetType="Label"
+                                                                Binding="{Binding IsToday}"
+                                                                Value="True">
+                                                        <Setter Property="TextColor" Value="#4ECDC4"/>
+                                                    </DataTrigger>
+                                                </Label.Triggers>
+                                            </Label>
+
+                                            <!-- Amount -->
+                                            <Label Grid.Row="1"
+                                                   Text="{Binding AmountDisplay}"
+                                                   FontSize="10"
+                                                   FontAttributes="Bold"
+                                                   TextColor="#FC5C65"
+                                                   HorizontalOptions="Center"
+                                                   IsVisible="{Binding HasTransactions}"
+                                                   Margin="0,2,0,0"/>
+
+                                            <!-- Today Indicator -->
+                                            <BoxView Grid.Row="2"
+                                                     BackgroundColor="#4ECDC4"
+                                                     WidthRequest="6"
+                                                     HeightRequest="6"
+                                                     CornerRadius="3"
+                                                     HorizontalOptions="Center"
+                                                     VerticalOptions="End"
+                                                     IsVisible="{Binding IsToday}"
+                                                     Margin="0,0,0,2"/>
+                                        </Grid>
+                                    </Frame>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Statistics Summary -->
+                <Frame BackgroundColor="White" 
+                       Padding="15"
+                       Margin="10,0"
+                       CornerRadius="10"
+                       HasShadow="True">
+                    <Grid ColumnDefinitions="*,*,*" ColumnSpacing="0">
+                        <!-- Income -->
+                        <VerticalStackLayout Grid.Column="0" Spacing="4">
+                            <Label Text="Thu nhập"
+                                   FontSize="11"
+                                   TextColor="#999999"
+                                   HorizontalOptions="Center"/>
+                            <Label Text="{Binding TotalIncome, StringFormat='{0:N0}đ'}"
+                                   FontSize="14"
+                                   FontAttributes="Bold"
+                                   TextColor="#26DE81"
+                                   HorizontalOptions="Center"/>
+                        </VerticalStackLayout>
+
+                        <!-- Expense -->
+                        <VerticalStackLayout Grid.Column="1" Spacing="4">
+                            <Label Text="Chi phí"
+                                   FontSize="11"
+                                   TextColor="#999999"
+                                   HorizontalOptions="Center"/>
+                            <Label Text="{Binding TotalExpense, StringFormat='{0:N0}đ'}"
+                                   FontSize="14"
+                                   FontAttributes="Bold"
+                                   TextColor="#FC5C65"
+                                   HorizontalOptions="Center"/>
+                        </VerticalStackLayout>
+
+                        <!-- Balance -->
+                        <VerticalStackLayout Grid.Column="2" Spacing="4">
+                            <Label Text="Số dư"
+                                   FontSize="11"
+                                   TextColor="#999999"
+                                   HorizontalOptions="Center"/>
+                            <Label x:Name="BalanceLabel"
+                                   Text="{Binding Balance, StringFormat='{0:N0}đ'}"
+                                   FontSize="14"
+                                   FontAttributes="Bold"
+                                   TextColor="#4ECDC4"
+                                   HorizontalOptions="Center"/>
+                        </VerticalStackLayout>
+                    </Grid>
+                </Frame>
+
+                <!-- Transaction Groups -->
+                <VerticalStackLayout Spacing="10" Padding="10,0,10,80">
+                    <CollectionView x:Name="TransactionsCollectionView"
+                                   ItemsSource="{Binding TransactionGroups}"
+                                   SelectionMode="None">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <VerticalStackLayout Spacing="8" Margin="0,0,0,10">
+                                    <!-- Date Header -->
+                                    <Label Text="{Binding DateDisplay}"
+                                           FontSize="14"
+                                           FontAttributes="Bold"
+                                           TextColor="#4ECDC4"
+                                           Margin="0,8,0,4"/>
+
+                                    <!-- Transactions List -->
+                                    <CollectionView ItemsSource="{Binding Transactions}"
+                                                  SelectionMode="Single"
+                                                  SelectionChanged="OnTransactionSelected"
+                                                  >
+                                        <CollectionView.ItemTemplate>
+                                            <DataTemplate>
+                                                <Frame Padding="12"
+                                                       BackgroundColor="White"
+                                                       CornerRadius="8"
+                                                       HasShadow="False"
+                                                       BorderColor="#E0E0E0"
+                                                       Margin="0,4">
+                                                    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                                                        <!-- Category Icon -->
+                                                        <Label Grid.Column="0"
+                                                               Text="{Binding CategoryIcon}"
+                                                               FontSize="28"
+                                                               VerticalOptions="Center"/>
+
+                                                        <!-- Category & Note -->
+                                                        <VerticalStackLayout Grid.Column="1" 
+                                                                           VerticalOptions="Center"
+                                                                           Spacing="2">
+                                                            <Label Text="{Binding CategoryName}"
+                                                                   FontSize="14"
+                                                                   FontAttributes="Bold"
+                                                                   TextColor="#333333"/>
+                                                            <Label Text="{Binding Note}"
+                                                                   FontSize="12"
+                                                                   TextColor="#999999"
+                                                                   IsVisible="{Binding HasNote}"/>
+                                                        </VerticalStackLayout>
+
+                                                        <!-- Amount -->
+                                                        <Label Grid.Column="2"
+                                                               Text="{Binding AmountDisplay}"
+                                                               FontSize="15"
+                                                               FontAttributes="Bold"
+                                                               TextColor="{Binding AmountColor}"
+                                                               VerticalOptions="Center"/>
+                                                    </Grid>
+                                                </Frame>
+                                            </DataTemplate>
+                                        </CollectionView.ItemTemplate>
+                                    </CollectionView>
+                                </VerticalStackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+
+                        <CollectionView.EmptyView>
+                            <VerticalStackLayout Padding="20" Spacing="10">
+                                <Label Text="📅" FontSize="40" HorizontalTextAlignment="Center"/>
+                                <Label Text="Chưa có giao dịch nào trong tháng này" 
+                                       FontSize="14" 
+                                       TextColor="#999999"
+                                       HorizontalTextAlignment="Center"/>
+                            </VerticalStackLayout>
+                        </CollectionView.EmptyView>
+                    </CollectionView>
+                </VerticalStackLayout>
+
+                <!-- Loading Indicator -->
+                <ActivityIndicator IsRunning="{Binding IsLoading}"
+                                 IsVisible="{Binding IsLoading}"
+                                 Color="#4ECDC4"
+                                 VerticalOptions="Center"
+                                 HorizontalOptions="Center"
+                                 Margin="0,20,0,0"/>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Floating Action Button -->
+        <Button Grid.Row="1"
+                Text="+"
+                FontSize="32"
+                FontAttributes="Bold"
+                BackgroundColor="#4ECDC4"
+                TextColor="White"
+                CornerRadius="28"
+                WidthRequest="56"
+                HeightRequest="56"
+                HorizontalOptions="End"
+                VerticalOptions="End"
+                Margin="0,0,16,16"
+                Clicked="OnAddTransactionClicked"
+                Padding="0"/>
+    </Grid>
+</ContentPage>

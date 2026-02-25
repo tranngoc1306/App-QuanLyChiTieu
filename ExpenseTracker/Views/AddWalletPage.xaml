@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ExpenseTracker.Views.AddWalletPage"
+             Title="Thêm ví mới"
+             BackgroundColor="#F5F5F5">
+
+    <ScrollView>
+        <StackLayout Padding="20" Spacing="20">
+
+            <!-- Header Icon -->
+            <Label Text="💳"
+                   FontSize="80"
+                   HorizontalOptions="Center"
+                   Margin="0,20,0,20"/>
+
+            <!-- Name -->
+            <Frame BackgroundColor="White" Padding="15" CornerRadius="10" HasShadow="False">
+                <StackLayout>
+                    <Label Text="Tên ví *"
+                           FontSize="12"
+                           TextColor="Gray"/>
+                    <Entry x:Name="NameEntry"
+                           Placeholder="Ví tiền mặt, Ngân hàng..."
+                           FontSize="16"
+                           TextColor="#333333"/>
+                </StackLayout>
+            </Frame>
+
+            <!-- Initial Balance -->
+            <Frame BackgroundColor="White" Padding="15" CornerRadius="10" HasShadow="False">
+                <StackLayout>
+                    <Label Text="Số dư ban đầu"
+                           FontSize="12"
+                           TextColor="Gray"/>
+                    <Entry x:Name="BalanceEntry"
+                           Placeholder="0"
+                           Keyboard="Numeric"
+                           FontSize="16"
+                           TextColor="#333333"/>
+                </StackLayout>
+            </Frame>
+
+            <!-- Monthly Budget -->
+            <Frame BackgroundColor="White" Padding="15" CornerRadius="10" HasShadow="False">
+                <StackLayout>
+                    <Label Text="Ngân sách tháng"
+                           FontSize="12"
+                           TextColor="Gray"/>
+                    <Entry x:Name="BudgetEntry"
+                           Placeholder="0"
+                           Keyboard="Numeric"
+                           FontSize="16"
+                           TextColor="#333333"/>
+                </StackLayout>
+            </Frame>
+
+            <!-- Icon Selection -->
+            <StackLayout>
+                <Label Text="Chọn biểu tượng"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       TextColor="#333333"
+                       Margin="0,10,0,10"/>
+
+                <CollectionView x:Name="IconsCollectionView"
+                                SelectionMode="Single"
+                                SelectionChanged="OnIconSelected">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical"
+                                       Span="6"
+                                       HorizontalItemSpacing="10"
+                                       VerticalItemSpacing="10"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame Padding="10"
+                                   CornerRadius="12"
+                                   HasShadow="False"
+                                   BackgroundColor="White"
+                                   BorderColor="#E0E0E0">
+                                <Label Text="{Binding .}"
+                                       FontSize="32"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center"/>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
+
+            <!-- Color Selection -->
+            <StackLayout>
+                <Label Text="Chọn màu sắc"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       TextColor="#333333"
+                       Margin="0,10,0,10"/>
+
+                <CollectionView x:Name="ColorsCollectionView"
+                                SelectionMode="Single"
+                                SelectionChanged="OnColorSelected">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical"
+                                       Span="6"
+                                       HorizontalItemSpacing="10"
+                                       VerticalItemSpacing="10"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+							<Frame Padding="0"
+                                   CornerRadius="25"
+                                   HasShadow="False"
+                                   BackgroundColor="{Binding .}"
+                                   WidthRequest="50"
+                                   HeightRequest="50"
+                                   BorderColor="#E0E0E0"/>
+							<!--BorderWidth="1"/>-->
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
+
+            <!-- Set as Default -->
+            <Frame BackgroundColor="White" Padding="15" CornerRadius="10" HasShadow="False">
+                <Grid ColumnDefinitions="Auto,*">
+                    <CheckBox x:Name="IsDefaultCheckBox"
+                              Grid.Column="0"
+                              Color="#4ECDC4"/>
+                    <Label Grid.Column="1"
+                           Text="Đặt làm ví mặc định"
+                           FontSize="16"
+                           TextColor="#333333"
+                           VerticalOptions="Center"
+                           Margin="10,0,0,0"/>
+                </Grid>
+            </Frame>
+
+            <!-- Buttons -->
+            <Button Text="Thêm ví"
+                    Clicked="OnSaveClicked"
+                    BackgroundColor="#4ECDC4"
+                    TextColor="White"
+                    FontSize="16"
+                    FontAttributes="Bold"
+                    Padding="15"
+                    CornerRadius="10"
+                    Margin="0,20,0,0"/>
+
+            <Button Text="Hủy"
+                    Clicked="OnCancelClicked"
+                    BackgroundColor="#E0E0E0"
+                    TextColor="#666666"
+                    FontSize="16"
+                    Padding="15"
+                    CornerRadius="10"/>
+
+        </StackLayout>
+    </ScrollView>
+
+</ContentPage>

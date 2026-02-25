@@ -1,0 +1,197 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ExpenseTracker.Views.WalletPage"
+             Title="Ví"
+             BackgroundColor="#F5F5F5">
+
+    <Grid RowDefinitions="Auto,*,Auto">
+        
+        <!-- Header Summary -->
+        <Frame Grid.Row="0" 
+               BackgroundColor="White" 
+               Padding="20" 
+               Margin="0,0,0,10"
+               CornerRadius="0"
+               HasShadow="True">
+            <StackLayout Spacing="10">
+                <Label Text="Tổng số dư"
+                       FontSize="14"
+                       TextColor="#666666"/>
+                <Label x:Name="TotalBalanceLabel"
+                       Text="0đ"
+                       FontSize="32"
+                       FontAttributes="Bold"
+                       TextColor="#4ECDC4"/>
+                
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="20" Margin="0,10,0,0">
+                    <StackLayout Grid.Column="0">
+                        <Label Text="Số ví"
+                               FontSize="12"
+                               TextColor="#999999"/>
+                        <Label x:Name="WalletCountLabel"
+                               Text="0"
+                               FontSize="20"
+                               FontAttributes="Bold"
+                               TextColor="#333333"/>
+                    </StackLayout>
+                    <StackLayout Grid.Column="1">
+                        <Label Text="Ngân sách tháng"
+                               FontSize="12"
+                               TextColor="#999999"/>
+                        <Label x:Name="TotalBudgetLabel"
+                               Text="0đ"
+                               FontSize="20"
+                               FontAttributes="Bold"
+                               TextColor="#FF9800"/>
+                    </StackLayout>
+                </Grid>
+            </StackLayout>
+        </Frame>
+
+        <!-- Wallet List -->
+        <ScrollView Grid.Row="1">
+            <StackLayout Padding="15" Spacing="10">
+                
+                <Label Text="Danh sách ví"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       TextColor="#333333"
+                       Margin="0,0,0,10"/>
+
+                <CollectionView x:Name="WalletsCollectionView"
+                                SelectionMode="Single"
+                                SelectionChanged="OnWalletSelected">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame BackgroundColor="White"
+                                   Padding="15"
+                                   Margin="0,5"
+                                   CornerRadius="15"
+                                   HasShadow="True">
+                                <Grid ColumnDefinitions="Auto,*,Auto" RowDefinitions="Auto,Auto,Auto">
+                                    
+                                    <!-- Icon -->
+                                    <Frame Grid.Column="0"
+                                           Grid.RowSpan="3"
+                                           Padding="10"
+                                           CornerRadius="12"
+                                           HasShadow="False"
+                                           BackgroundColor="{Binding Color}"
+                                           WidthRequest="60"
+                                           HeightRequest="60"
+                                           VerticalOptions="Center">
+                                        <Label Text="{Binding Icon}"
+                                               FontSize="28"
+                                               HorizontalOptions="Center"
+                                               VerticalOptions="Center"/>
+                                    </Frame>
+
+                                    <!-- Wallet Info -->
+                                    <StackLayout Grid.Column="1"
+                                                Grid.Row="0"
+                                                Margin="15,0,0,0"
+                                                Spacing="3">
+                                        <Grid ColumnDefinitions="*,Auto">
+                                            <Label Grid.Column="0"
+                                                   Text="{Binding Name}"
+                                                   FontSize="18"
+                                                   FontAttributes="Bold"
+                                                   TextColor="#333333"/>
+                                            <Label Grid.Column="1"
+                                                   Text="⭐"
+                                                   FontSize="16"
+                                                   IsVisible="{Binding IsDefault}"/>
+                                        </Grid>
+                                        
+                                        <Label Text="{Binding BalanceDisplay}"
+                                               FontSize="20"
+                                               FontAttributes="Bold"
+                                               TextColor="{Binding BalanceColor}"/>
+                                    </StackLayout>
+
+                                    <!-- Budget Progress -->
+                                    <StackLayout Grid.Column="1"
+                                                Grid.Row="1"
+                                                Margin="15,5,0,0"
+                                                IsVisible="{Binding HasBudget}">
+                                        <Grid ColumnDefinitions="*,Auto">
+                                            <Label Grid.Column="0"
+                                                   Text="Ngân sách tháng"
+                                                   FontSize="12"
+                                                   TextColor="#666666"/>
+                                            <Label Grid.Column="1"
+                                                   Text="{Binding BudgetDisplay}"
+                                                   FontSize="12"
+                                                   TextColor="#FF9800"/>
+                                        </Grid>
+                                        <ProgressBar Progress="{Binding BudgetProgress}"
+                                                    ProgressColor="{Binding BudgetProgressColor}"
+                                                    HeightRequest="6"
+                                                    Margin="0,5,0,0"/>
+                                    </StackLayout>
+
+                                    <!-- Action Buttons -->
+                                    <HorizontalStackLayout Grid.Column="2"
+                                                          Grid.RowSpan="3"
+                                                          Spacing="10"
+                                                          VerticalOptions="Center">
+                                        <Label Text="✏️"
+                                               FontSize="24">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="OnEditWalletTapped"
+                                                                     CommandParameter="{Binding .}"/>
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                        <Label Text="🗑️"
+                                               FontSize="24">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="OnDeleteWalletTapped"
+                                                                     CommandParameter="{Binding .}"/>
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                    </HorizontalStackLayout>
+                                </Grid>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <!-- Empty State -->
+                <StackLayout x:Name="EmptyStateLayout"
+                            VerticalOptions="Center"
+                            Padding="20"
+                            Spacing="20"
+                            IsVisible="False">
+                    <Label Text="💳"
+                           FontSize="80"
+                           HorizontalOptions="Center"/>
+                    <Label Text="Chưa có ví nào"
+                           FontSize="20"
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center"
+                           TextColor="#333333"/>
+                    <Label Text="Nhấn nút + bên dưới để thêm ví mới"
+                           FontSize="14"
+                           HorizontalOptions="Center"
+                           TextColor="#666666"/>
+                </StackLayout>
+
+            </StackLayout>
+        </ScrollView>
+
+        <!-- Add Wallet Button -->
+        <Button Grid.Row="2"
+                Text="➕ Thêm ví mới"
+                Clicked="OnAddWalletClicked"
+                BackgroundColor="#4ECDC4"
+                TextColor="White"
+                FontSize="16"
+                FontAttributes="Bold"
+                Padding="15"
+                Margin="15"
+                CornerRadius="10"/>
+
+    </Grid>
+
+</ContentPage>

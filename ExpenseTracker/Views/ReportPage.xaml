@@ -1,0 +1,331 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:microcharts="clr-namespace:Microcharts.Maui;assembly=Microcharts.Maui"
+             x:Class="ExpenseTracker.Views.ReportPage"
+             Title="Báo cáo"
+             BackgroundColor="#F5F5F5">
+
+    <Grid RowDefinitions="Auto,*">
+        <!-- Wallet Selector - Ghim đầu trang, thu nhỏ, giữa màn -->
+        <Frame Grid.Row="0"
+			   Padding="10" 
+			   Margin="60,10,60,0" 
+			   BackgroundColor="White" 
+			   CornerRadius="10"
+			   HasShadow="True"
+			   HorizontalOptions="Center">
+            <VerticalStackLayout Spacing="3" HorizontalOptions="Center">
+                <Label Text="💼" 
+					   FontSize="24" 
+					   HorizontalTextAlignment="Center"/>
+                <Picker x:Name="WalletPicker"
+						Title="Chọn ví"
+						SelectedIndexChanged="OnWalletChanged"
+						FontSize="14"
+						FontAttributes="Bold"
+						TextColor="#333333"
+						HorizontalTextAlignment="Center"/>
+            </VerticalStackLayout>
+        </Frame>
+
+        <!-- Main Content -->
+        <ScrollView Grid.Row="1" Margin="0,10,0,0">
+            <VerticalStackLayout Padding="10" Spacing="10">
+
+                <!-- Period Type Selector (Month/Year) -->
+                <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
+                    <Button x:Name="MonthViewButton"
+							Text="Tháng"
+							Clicked="OnMonthViewClicked"
+							BackgroundColor="#4ECDC4"
+							TextColor="White"
+							CornerRadius="20"
+							Padding="25,10"
+							FontSize="14"/>
+                    <Button x:Name="YearViewButton"
+							Text="Năm"
+							Clicked="OnYearViewClicked"
+							BackgroundColor="#E0E0E0"
+							TextColor="#666"
+							CornerRadius="20"
+							Padding="25,10"
+							FontSize="14"/>
+                </HorizontalStackLayout>
+
+                <!-- Time Period Selector -->
+                <Frame CornerRadius="10" HasShadow="True" BackgroundColor="White" Padding="12">
+                    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
+                        <Button Grid.Column="0"
+								Text="◀"
+								Clicked="OnPreviousPeriodClicked"
+								BackgroundColor="Transparent"
+								TextColor="#4ECDC4"
+								FontSize="20"
+								Padding="0"
+								WidthRequest="40"/>
+
+                        <Label Grid.Column="1"
+							   x:Name="PeriodLabel"
+							   Text="Tháng này"
+							   FontSize="16"
+							   FontAttributes="Bold"
+							   HorizontalTextAlignment="Center"
+							   VerticalTextAlignment="Center"
+							   TextColor="#333"/>
+
+                        <Button Grid.Column="2"
+								Text="▶"
+								Clicked="OnNextPeriodClicked"
+								BackgroundColor="Transparent"
+								TextColor="#4ECDC4"
+								FontSize="20"
+								Padding="0"
+								WidthRequest="40"/>
+                    </Grid>
+                </Frame>
+
+                <!-- Chart Type Selector -->
+                <HorizontalStackLayout Spacing="8" HorizontalOptions="Center">
+                    <Button x:Name="BarChartButton"
+							Text="📊 Cột"
+							Clicked="OnBarChartClicked"
+							BackgroundColor="#4ECDC4"
+							TextColor="White"
+							CornerRadius="8"
+							Padding="15,8"
+							FontSize="13"/>
+                    <Button x:Name="LineChartButton"
+							Text="📈 Đường"
+							Clicked="OnLineChartClicked"
+							BackgroundColor="#E0E0E0"
+							TextColor="#666"
+							CornerRadius="8"
+							Padding="15,8"
+							FontSize="13"/>
+                    <Button x:Name="AreaChartButton"
+							Text="📊 Vùng"
+							Clicked="OnAreaChartClicked"
+							BackgroundColor="#E0E0E0"
+							TextColor="#666"
+							CornerRadius="8"
+							Padding="15,8"
+							FontSize="13"/>
+                </HorizontalStackLayout>
+
+                <!-- Summary Cards -->
+                <Grid ColumnDefinitions="*,*,*" ColumnSpacing="8">
+                    <Frame Grid.Column="0" CornerRadius="10" HasShadow="False" BackgroundColor="#E8F5E9" Padding="10">
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="Thu nhập"
+								   FontSize="11"
+								   TextColor="#666"
+								   HorizontalTextAlignment="Center"/>
+                            <Label x:Name="TotalIncomeLabel"
+								   Text="0đ"
+								   FontSize="14"
+								   FontAttributes="Bold"
+								   TextColor="#26DE81"
+								   HorizontalTextAlignment="Center"/>
+                        </VerticalStackLayout>
+                    </Frame>
+
+                    <Frame Grid.Column="1" CornerRadius="10" HasShadow="False" BackgroundColor="#FFEBEE" Padding="10">
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="Chi phí"
+								   FontSize="11"
+								   TextColor="#666"
+								   HorizontalTextAlignment="Center"/>
+                            <Label x:Name="TotalExpenseLabel"
+								   Text="0đ"
+								   FontSize="14"
+								   FontAttributes="Bold"
+								   TextColor="#FC5C65"
+								   HorizontalTextAlignment="Center"/>
+                        </VerticalStackLayout>
+                    </Frame>
+
+                    <Frame Grid.Column="2" CornerRadius="10" HasShadow="False" BackgroundColor="#E3F2FD" Padding="10">
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="Thu chi"
+								   FontSize="11"
+								   TextColor="#666"
+								   HorizontalTextAlignment="Center"/>
+                            <Label x:Name="NetIncomeLabel"
+								   Text="0đ"
+								   FontSize="14"
+								   FontAttributes="Bold"
+								   HorizontalTextAlignment="Center"/>
+                        </VerticalStackLayout>
+                    </Frame>
+                </Grid>
+
+                <!-- Main Chart -->
+                <Frame CornerRadius="10" HasShadow="True" Padding="12" BackgroundColor="White">
+                    <VerticalStackLayout Spacing="8">
+                        <Label x:Name="MainChartTitle"
+							   Text="Biểu đồ giao dịch theo ngày"
+							   FontSize="16"
+							   FontAttributes="Bold"
+							   TextColor="#333"/>
+
+                        <!-- Chart Toggle (Income/Expense) -->
+                        <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
+                            <CheckBox x:Name="ShowIncomeCheckbox"
+									 IsChecked="True"
+									 CheckedChanged="OnChartDataToggled"
+									 Color="#26DE81"/>
+                            <Label Text="Thu nhập"
+								   FontSize="13"
+								   TextColor="#26DE81"
+								   VerticalTextAlignment="Center"/>
+
+                            <CheckBox x:Name="ShowExpenseCheckbox"
+									 IsChecked="True"
+									 CheckedChanged="OnChartDataToggled"
+									 Color="#FC5C65"
+									 Margin="15,0,0,0"/>
+                            <Label Text="Chi phí"
+								   FontSize="13"
+								   TextColor="#FC5C65"
+								   VerticalTextAlignment="Center"/>
+                        </HorizontalStackLayout>
+
+                        <!-- Custom Chart Container -->
+                        <Grid>
+                            <!-- Y-axis Labels (Left) -->
+                            <VerticalStackLayout x:Name="YAxisLabels"
+											   Grid.Column="0"
+											   Spacing="0"
+											   WidthRequest="60"
+											   HorizontalOptions="Start"
+											   VerticalOptions="Start"
+											   Margin="0,10,10,30"/>
+
+                            <!-- Chart ScrollView -->
+                            <ScrollView Orientation="Horizontal"
+									   HorizontalScrollBarVisibility="Always"
+									   Margin="60,0,0,0">
+                                <Grid x:Name="ChartContainer"
+									  RowDefinitions="300,30"
+									  BackgroundColor="White">
+
+                                    <!-- Chart Canvas -->
+                                    <GraphicsView x:Name="ChartCanvas"
+												Grid.Row="0"
+												HeightRequest="300"
+												WidthRequest="800"
+												BackgroundColor="White"/>
+
+                                    <!-- X-axis Labels (Bottom) -->
+                                    <HorizontalStackLayout x:Name="XAxisLabels"
+														  Grid.Row="1"
+														  Spacing="0"
+														  HeightRequest="30"/>
+                                </Grid>
+                            </ScrollView>
+                        </Grid>
+
+                        <!-- Axis Titles -->
+                        <Label x:Name="XAxisTitle"
+							   Text="Ngày trong tháng"
+							   FontSize="11"
+							   TextColor="#666"
+							   HorizontalTextAlignment="Center"
+							   Margin="0,5,0,0"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Category Type Toggle -->
+                <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
+                    <Button x:Name="ExpenseToggleButton"
+							Text="Chi phí"
+							Clicked="OnExpenseToggleClicked"
+							BackgroundColor="#4ECDC4"
+							TextColor="White"
+							CornerRadius="20"
+							Padding="20,10"
+							FontSize="14"/>
+                    <Button x:Name="IncomeToggleButton"
+							Text="Thu nhập"
+							Clicked="OnIncomeToggleClicked"
+							BackgroundColor="#E0E0E0"
+							TextColor="#666"
+							CornerRadius="20"
+							Padding="20,10"
+							FontSize="14"/>
+                </HorizontalStackLayout>
+
+                <!-- Pie Chart -->
+                <Frame CornerRadius="10" HasShadow="True" Padding="12" BackgroundColor="White">
+                    <VerticalStackLayout Spacing="8">
+                        <Label x:Name="PieChartTitle"
+							   Text="Chi phí theo danh mục"
+							   FontSize="16"
+							   FontAttributes="Bold"
+							   TextColor="#333"/>
+
+                        <microcharts:ChartView x:Name="CategoryChartView"
+											  HeightRequest="250"/>
+
+                        <!-- Category Legend -->
+                        <CollectionView x:Name="CategoryLegendView"
+									   SelectionMode="None">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Padding="8,4" ColumnDefinitions="25,*,Auto" ColumnSpacing="8">
+                                        <BoxView Grid.Column="0"
+												Color="{Binding Color}"
+												CornerRadius="4"
+												WidthRequest="20"
+												HeightRequest="20"
+												VerticalOptions="Center"/>
+                                        <Label Grid.Column="1"
+											  Text="{Binding Name}"
+											  FontSize="13"
+											  VerticalTextAlignment="Center"
+											  TextColor="#333"/>
+                                        <Label Grid.Column="2"
+											  FontSize="13"
+											  FontAttributes="Bold"
+											  VerticalTextAlignment="Center">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="{Binding Amount, StringFormat='{0:N0}đ'}" TextColor="#333"/>
+                                                    <Span Text=" (" TextColor="#999"/>
+                                                    <Span Text="{Binding Percentage, StringFormat='{0:F1}%'}" TextColor="#999"/>
+                                                    <Span Text=")" TextColor="#999"/>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Empty State -->
+                <VerticalStackLayout x:Name="EmptyStateLayout"
+									IsVisible="False"
+									Spacing="10"
+									Padding="40"
+									HorizontalOptions="Center"
+									VerticalOptions="Center">
+                    <Label Text="📊"
+						   FontSize="48"
+						   HorizontalTextAlignment="Center"/>
+                    <Label Text="Chưa có dữ liệu"
+						   FontSize="16"
+						   TextColor="#999"
+						   HorizontalTextAlignment="Center"/>
+                    <Label Text="Hãy thêm giao dịch để xem báo cáo"
+						   FontSize="14"
+						   TextColor="#999"
+						   HorizontalTextAlignment="Center"/>
+                </VerticalStackLayout>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

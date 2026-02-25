@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="ExpenseTracker.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:ExpenseTracker.Views"
+    Shell.FlyoutBehavior="Disabled"
+    Shell.NavBarIsVisible="False">
+
+    <!-- Tab Bar -->
+    <TabBar>
+        <!-- Giao dịch Tab -->
+        <ShellContent
+            Title="Giao dịch"
+            
+            ContentTemplate="{DataTemplate views:TransactionPage}"
+            Route="TransactionPage">
+            <ShellContent.Icon>
+                <FontImageSource 
+                    FontFamily="Arial"
+                    Glyph="💰"
+                    Size="24"
+                    Color="{AppThemeBinding Light=#4ECDC4, Dark=#4ECDC4}"/>
+            </ShellContent.Icon>
+        </ShellContent>
+
+        <!-- Ví Tab -->
+        <ShellContent
+            Title="Ví"
+            ContentTemplate="{DataTemplate views:WalletPage}"
+            Route="WalletPage">
+            <ShellContent.Icon>
+                <FontImageSource 
+                    FontFamily="Arial"
+                    Glyph="💳"
+                    Size="24"
+                    Color="{AppThemeBinding Light=#666666, Dark=#666666}"/>
+            </ShellContent.Icon>
+        </ShellContent>
+
+        <!-- Lịch Tab -->
+        <ShellContent
+            Title="Lịch"
+            ContentTemplate="{DataTemplate views:CalendarPage}"
+            Route="CalendarPage">
+            <ShellContent.Icon>
+                <FontImageSource 
+                    FontFamily="Arial"
+                    Glyph="📅"
+                    Size="24"
+                    Color="{AppThemeBinding Light=#666666, Dark=#666666}"/>
+            </ShellContent.Icon>
+        </ShellContent>
+
+        <!-- Báo cáo Tab -->
+        <ShellContent
+            Title="Báo cáo"
+            ContentTemplate="{DataTemplate views:ReportPage}"
+            Route="ReportPage">
+            <ShellContent.Icon>
+                <FontImageSource 
+                    FontFamily="Arial"
+                    Glyph="📊"
+                    Size="24"
+                    Color="{AppThemeBinding Light=#666666, Dark=#666666}"/>
+            </ShellContent.Icon>
+        </ShellContent>
+
+        <!-- Cài đặt Tab -->
+        <ShellContent
+            Title="Cài đặt"
+            ContentTemplate="{DataTemplate views:SettingsPage}"
+            Route="SettingsPage">
+            <ShellContent.Icon>
+                <FontImageSource 
+                    FontFamily="Arial"
+                    Glyph="⚙️"
+                    Size="24"
+                    Color="{AppThemeBinding Light=#666666, Dark=#666666}"/>
+            </ShellContent.Icon>
+        </ShellContent>
+
+        
+    </TabBar>
+
+</Shell>

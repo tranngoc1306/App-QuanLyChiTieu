@@ -1,0 +1,132 @@
+is_global = true
+build_property.EnableAotAnalyzer = 
+build_property.EnableSingleFileAnalyzer = 
+build_property.EnableTrimAnalyzer = false
+build_property.IncludeAllContentForSelfExtract = 
+build_property.MvvmToolkitEnableINotifyPropertyChangingSupport = true
+build_property._MvvmToolkitIsUsingWindowsRuntimePack = false
+build_property.CsWinRTComponent = 
+build_property.CsWinRTAotOptimizerEnabled = 
+build_property.CsWinRTAotWarningLevel = 
+build_property.TargetFramework = net9.0-ios
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = false
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = ExpenseTracker
+build_property.ProjectDir = D:\Projects\ExpenseTracker\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.EffectiveAnalysisLevelStyle = 9.0
+build_property.EnableCodeStyleSeverity = 
+
+[D:/Projects/ExpenseTracker/App.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = ExpenseTracker.App.xaml
+build_metadata.AdditionalFiles.TargetPath = App.xaml
+build_metadata.AdditionalFiles.RelativePath = App.xaml
+
+[D:/Projects/ExpenseTracker/AppShell.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = ExpenseTracker.AppShell.xaml
+build_metadata.AdditionalFiles.TargetPath = AppShell.xaml
+build_metadata.AdditionalFiles.RelativePath = AppShell.xaml
+
+[D:/Projects/ExpenseTracker/MainPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = ExpenseTracker.MainPage.xaml
+build_metadata.AdditionalFiles.TargetPath = MainPage.xaml
+build_metadata.AdditionalFiles.RelativePath = MainPage.xaml
+
+[D:/Projects/ExpenseTracker/Resources/Styles/Colors.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = ExpenseTracker.Resources.Styles.Colors.xaml
+build_metadata.AdditionalFiles.TargetPath = Resources\Styles\Colors.xaml
+build_metadata.AdditionalFiles.RelativePath = Resources\Styles\Colors.xaml
+
+[D:/Projects/ExpenseTracker/Resources/Styles/Styles.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = ExpenseTracker.Resources.Styles.Styles.xaml
+build_metadata.AdditionalFiles.TargetPath = Resources\Styles\Styles.xaml
+build_metadata.AdditionalFiles.RelativePath = Resources\Styles\Styles.xaml
+
+[D:/Projects/ExpenseTracker/Views/AddWalletPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = ExpenseTracker.Views.AddWalletPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\AddWalletPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\AddWalletPage.xaml
+
+[D:/Projects/ExpenseTracker/Views/Calendar.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = ExpenseTracker.Views.Calendar.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\Calendar.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\Calendar.xaml
+
+[D:/Projects/ExpenseTracker/Views/ChangePasswordPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = ExpenseTracker.Views.ChangePasswordPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\ChangePasswordPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\ChangePasswordPage.xaml
+
+[D:/Projects/ExpenseTracker/Views/EditProfilePage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = ExpenseTracker.Views.EditProfilePage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\EditProfilePage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\EditProfilePage.xaml
+
+[D:/Projects/ExpenseTracker/Views/LoginPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = ExpenseTracker.Views.LoginPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\LoginPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\LoginPage.xaml
+
+[D:/Projects/ExpenseTracker/Views/ManageCategoriesPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = ExpenseTracker.Views.ManageCategoriesPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\ManageCategoriesPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\ManageCategoriesPage.xaml
+
+[D:/Projects/ExpenseTracker/Views/RegisterPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = ExpenseTracker.Views.RegisterPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\RegisterPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\RegisterPage.xaml
+
+[D:/Projects/ExpenseTracker/Views/ReportPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = ExpenseTracker.Views.ReportPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\ReportPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\ReportPage.xaml
+
+[D:/Projects/ExpenseTracker/Views/SettingsPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = ExpenseTracker.Views.SettingsPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\SettingsPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\SettingsPage.xaml
+
+[D:/Projects/ExpenseTracker/Views/TransactionDetailPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = ExpenseTracker.Views.TransactionDetailPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\TransactionDetailPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\TransactionDetailPage.xaml
+
+[D:/Projects/ExpenseTracker/Views/TransactionPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = ExpenseTracker.Views.TransactionPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\TransactionPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\TransactionPage.xaml
+
+[D:/Projects/ExpenseTracker/Views/WalletDetailPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = ExpenseTracker.Views.WalletDetailPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\WalletDetailPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\WalletDetailPage.xaml
+
+[D:/Projects/ExpenseTracker/Views/WalletPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = ExpenseTracker.Views.WalletPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\WalletPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\WalletPage.xaml
